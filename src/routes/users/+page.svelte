@@ -1,33 +1,50 @@
+<!-- src/routes/users/+page.svelte -->
 <script>
-  let users = $state(["steve", "tim", "bob"])
-  let user = $state("")
-  const handleClick = (e) => {
-    user = e.target.textContent
-  }
-  $effect(() => {
-    if (user == "") user = "<current user>"
-  })
-  const handleClear = () => {
-    user = ""
-  }
+  import BackToHome from '$lib/components/BackToHome.svelte';
+  let { data } = $props();
+  let { users } = data;
 </script>
 
-<h1 class="text-red-500 text-4xl p-4">USERS</h1>
-<div class="p-4 max-w-xl flex flex-col items-center">
-  <ul class="w-fit">
-    {#each users as user}
-      <li id="user">
-        <button onclick={handleClick} class="my-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded-md border border-gray-300 w-28 text-center">
-          {user}
-        </button>
-      </li>
-    {/each}
+<div class="p-6">
+  <h1 class="text-4xl mb-6">Users</h1>
+  
+  <ul class="space-y-4">
+      {#each users as user}
+          <li class="block">
+              <a 
+                  href="/users/{user.username}" 
+                  class="block p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                  {user.username}
+                  <span class="text-gray-500 text-sm ml-2">
+                      ({user.posts.length} posts)
+                  </span>
+              </a>
+          </li>
+      {/each}
   </ul>
-  <button onclick={handleClear} class="my-2 px-4 py-2 bg-red-200 hover:bg-red-300 cursor-pointer rounded-md border border-gray-300 w-20 text-center">
-    clear
-  </button>
 </div>
-<div>
-  <h2>Current User:</h2>
-  {user}
+
+<div class="mb-8">
+  <h2 class="text-2xl mb-4">Create New User</h2>
+  <form method="POST" action="?/createUser" class="space-y-4">
+      <div>
+          <label for="username" class="block mb-2">Username:</label>
+          <input
+              id="username"
+              name="username"
+              type="text"
+              required
+              class="w-full p-2 border rounded"
+          />
+      </div>
+      <button
+          type="submit"
+          class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      >
+          Create User
+      </button>
+  </form>
 </div>
+
+<BackToHome />
