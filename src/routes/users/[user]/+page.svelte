@@ -1,14 +1,13 @@
 <!-- src/routes/users/[user]/+page.svelte -->
 <script>
   import BackToHome from '$lib/components/BackToHome.svelte';
-  let { data } = $props();
-  let { user, posts } = data;
+//   let { data } = $props();
+//   let { user, posts } = data;
 </script>
-
+<!-- 
 <div class="p-6">
   <h1 class="text-4xl mb-6">{user.username}'s Profile</h1>
 
-  <!-- Create Post Form -->
   <div class="mb-8">
       <h2 class="text-2xl mb-4">Create a New Post</h2>
       <form method="POST" action="?/createPost" class="space-y-4">
@@ -40,7 +39,6 @@
       </form>
   </div>
 
-  <!-- Posts List -->
   <div>
       <h2 class="text-2xl mb-4">Posts</h2>
       {#if posts.length > 0}
@@ -63,6 +61,6 @@
           <p class="text-gray-600">No posts yet.</p>
       {/if}
   </div>
-</div>
+</div> -->
 
 <BackToHome />

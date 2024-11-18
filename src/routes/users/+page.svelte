@@ -1,11 +1,11 @@
 <!-- src/routes/users/+page.svelte -->
 <script>
   import BackToHome from '$lib/components/BackToHome.svelte';
-  let { data } = $props();
-  let { users } = data;
+//   let { data } = $props();
+//   let { users } = data;
 </script>
 
-<div class="p-6">
+<!-- <div class="p-6">
   <h1 class="text-4xl mb-6">Users</h1>
   
   <ul class="space-y-4">
@@ -23,9 +23,9 @@
           </li>
       {/each}
   </ul>
-</div>
+</div> -->
 
-<div class="mb-8">
+<!-- <div class="mb-8">
   <h2 class="text-2xl mb-4">Create New User</h2>
   <form method="POST" action="?/createUser" class="space-y-4">
       <div>
@@ -45,6 +45,6 @@
           Create User
       </button>
   </form>
-</div>
+</div> -->
 
 <BackToHome />
