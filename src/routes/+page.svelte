@@ -1,6 +1,9 @@
 <script>
   import { fly } from 'svelte/transition'
   import Header from './Header.svelte'
+  
+	let { data } = $props();
+  const { users } = data
 
   let name = $state("josh");
   let status = $state("OPEN")
@@ -26,7 +29,7 @@
   })
 
   $inspect(formState.step)
-  
+
 
   const QUESTIONS = [
     {
@@ -162,3 +165,8 @@
     <button onclick={() => nextStep(id)}>Next Step</button>
   </article>
 {/snippet}
+
+<h1 class="mt-12">{users[0].id}</h1>
+<h2>{users[0].username}</h2>
+
+<h3>{JSON.stringify(data)}</h3>
