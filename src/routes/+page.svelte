@@ -1,4 +1,5 @@
 <script>
+  import { fly } from 'svelte/transition'
   import Header from './Header.svelte'
 
   let name = $state("josh");
@@ -23,6 +24,9 @@
     step: 0, 
     error: "",
   })
+
+  $inspect(formState.step)
+  
 
   const QUESTIONS = [
     {
@@ -50,6 +54,27 @@
       formState.error = "Please fill out the form input"
     }
   }
+
+  // will run on mount
+  // $effect(() => {
+  //   console.log('on mounted')
+  //   return () => {
+  //     // when unmounted or destroyed
+  //     // or before the effect re-runs when dependent state changes
+  //     console.log('on unmounted')
+  //   }
+  // })
+
+  // $effect(() => {
+  //   // re-runs when formState.step has changed
+  //   console.log('formState', formState.step)
+  //   // DON'T create state based off other state in this effect
+  //   // use $derived
+  //   return () => {
+  //     // before effect re-runs
+  //     console.log('before formState reruns', formState.step)
+  //   }
+  // })
 
 </script>
 
@@ -94,7 +119,6 @@
       <p class="text-red-500">{formState.error}</p>
     {/if}
     <button class="my-4 bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-md" onclick={() => {
-      console.log(formState.answers.username)
       if (formState.answers.username != "") {
         formState.step += 1
       } else {
@@ -116,7 +140,13 @@
 {/each} -->
 {#each QUESTIONS as question, index (question.id)}
   {#if formState.step === index} 
-    {@render formStep(question)}  
+    <!-- animations -->
+    <div 
+      in:fly={{ x: 200, duration: 200, opacity: 0 }} 
+      out:fly={{ x: -200, duration: 200, opacity: 0 }}
+    >
+      {@render formStep(question)}  
+    </div>
   {/if}
 {/each}
 
