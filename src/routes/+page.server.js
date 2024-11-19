@@ -14,3 +14,22 @@ export async function load({ params }) {
     return fail(500, { error: 'Failed to load users'})
   }
 }
+
+export const actions = {
+  createUser: async ({ request }) => {
+    const data = await request.formData()
+    const username = data.get('username')
+    const email = data.get('email')
+    console.log(username)
+    console.log(email)
+
+    const user = await prisma.user.create({
+      data: {
+        username, 
+        email
+      }
+    })
+
+    return user
+  }
+}
